@@ -1,0 +1,6 @@
+package genetipher
+
+
+object Algorithm {
+
+}
