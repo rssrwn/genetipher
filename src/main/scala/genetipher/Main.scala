@@ -2,6 +2,8 @@ package genetipher
 
 import scala.io.Source
 
+import geneticsearch.algorithm.GeneticAlgorithm
+
 
 object Main {
 
@@ -26,33 +28,11 @@ object Main {
             None
         }
 
-        val decoded = decode(cipherText, encodingType)
+        val decoded = new Decoder(cipherText, encodingType).decode()
 
         if (decoded.isDefined) {
             println("The decoded string is as follows: ")
             println(decoded)
-        }
-    }
-
-    private def decode(cipherText: String, encoding: Option[String]): Option[String] = {
-        if (encoding.isEmpty) {
-            // Find encoding
-            println("Finding an encoding automatically is not currently supported, exiting...")
-            None()
-
-        } else {
-            val algorithm: Option[] = encoding match {
-                case "substition" => Some(null)
-                case default =>
-                    println(s"Cipher type $default is not supported, exiting...")
-                    None()
-            }
-
-            if (algorithm.isEmpty) {
-                None()
-            } else {
-                Some("")
-            }
         }
     }
 
