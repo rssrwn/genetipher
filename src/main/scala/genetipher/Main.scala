@@ -5,7 +5,6 @@ import scala.io.Source
 
 object Main {
 
-
     def main(args: Array[String]): Unit = {
         val REQUIRED_ARGS = 1
 
@@ -15,7 +14,8 @@ object Main {
 
         val filename = args(1)
         println(s"Filename of $filename passed into decoder")
-        val cipherText = readFile(filename)
+
+        val ciphertext = readFile(filename)
 
         val encodingType = if (args.length > REQUIRED_ARGS + 1) {
             val cipherType = args(2)
@@ -26,11 +26,20 @@ object Main {
             None
         }
 
-        val decoded = new Decoder(cipherText, encodingType).decode()
+        val decodedOpt = new Decoder(ciphertext, encodingType).decode()
 
-        if (decoded.isDefined) {
-            println("The decoded string is as follows: ")
-            println(decoded)
+        if (decodedOpt.isDefined) {
+            val decoded = decodedOpt.get
+            if (decoded.length == 1) {
+                println("The decoded string is as follows: ")
+                println(decoded.head)
+            } else {
+                println("The following are all the possible plaintext solutions found by the search...")
+                for (plaintext <- decoded) {
+                    println(plaintext)
+                    println("\n*****************************\n")
+                }
+            }
         }
     }
 

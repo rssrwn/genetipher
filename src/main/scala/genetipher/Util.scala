@@ -20,14 +20,18 @@ object Util {
       */
     def buildPlaintext(ciphertext: String, subs: Vector[Char]): String = {
         ciphertext.map { char: Char =>
-            val ascii = char.toInt
-            val idx = if (isUpperCase(char)) {
-                ascii - ASCII_UPPER_A
+            if (char == ' ') {
+                ' '
             } else {
-                ascii - ASCII_LOWER_A
-            }
+                val ascii = char.toInt
+                val idx = if (isUpperCase(char)) {
+                    ascii - ASCII_UPPER_A
+                } else {
+                    ascii - ASCII_LOWER_A
+                }
 
-            subs(idx)
+                subs(idx)
+            }
         }
     }
 
