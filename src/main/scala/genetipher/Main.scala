@@ -2,8 +2,6 @@ package genetipher
 
 import scala.io.Source
 
-import geneticsearch.algorithm.GeneticAlgorithm
-
 
 object Main {
 
