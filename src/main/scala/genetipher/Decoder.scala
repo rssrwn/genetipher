@@ -1,6 +1,5 @@
 package genetipher
 
-
-object Algorithm {
+class Decoder {
 
 }
