@@ -1,13 +1,14 @@
 package genetipher
 
-import geneticsearch.algorithm.GeneticAlgorithmBuilder
+import geneticsearch.algorithm.{GeneticAlgorithm, GeneticAlgorithmBuilder}
+import geneticsearch.operators.Selection
 
 
 object AlgorithmFactory {
 
-    val subsSolver = new GeneticAlgorithmBuilder[Char]()
-            .withSelectionOp()
+    def lamdbaMuSubsSolver(lambda: Int, mu: Int): GeneticAlgorithm[Char] = new GeneticAlgorithmBuilder[Char]()
             .withFitnessOp()
+            .withSelectionOp(Selection.selectBest(lambda))
             .withMutationOp()
             .build()
 
