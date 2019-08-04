@@ -3,9 +3,12 @@ package genetipher
 
 object Util {
 
-    private val ASCII_UPPER_A = 65
-    private val ASCII_LOWER_A = 97
-    private val ASCII_UPPER_Z = 90
+    val ASCII_UPPER_A = 65
+    val ASCII_LOWER_A = 97
+    val ASCII_UPPER_Z = 90
+    val ASCII_LOWER_Z = 122
+
+    val NUM_LETTERS: Int = (ASCII_UPPER_Z - ASCII_UPPER_A) + 1
 
     /**
       * Construct the plaintext from a given ciphertext and decoding strategy
@@ -32,7 +35,7 @@ object Util {
       * @param char Character to be checked
       * @return Whether the char is uppercase or not
       */
-    private def isUpperCase(char: Char): Boolean = {
+    def isUpperCase(char: Char): Boolean = {
         val ascii = char.toInt
         if (ascii >= ASCII_UPPER_A && ascii <= ASCII_UPPER_Z) {
             true
