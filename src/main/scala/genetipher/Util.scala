@@ -1,5 +1,7 @@
 package genetipher
 
+import scala.util.Random
+
 
 object Util {
 
@@ -42,6 +44,24 @@ object Util {
         } else {
             false
         }
+    }
+
+
+    /**
+      * Generates a lowercase character uniformly randomly selected
+      * @return Random char
+      */
+    def randChar(): Char = {
+        (Util.ASCII_LOWER_A + Random.nextInt(Util.NUM_LETTERS)).toChar
+    }
+
+    /**
+      * Generates a Seq of lowercase characters uniformly randomly selected
+      * @param length Length of Seq to be generated
+      * @return Seq of random characters
+      */
+    def randCharSeq(length: Int): Seq[Char] = {
+        for (_ <- 0 until length) yield randChar()
     }
 
 }
