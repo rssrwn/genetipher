@@ -9,7 +9,7 @@ object EnglishScore {
 
     private val NGRAM_LENGTH = 3
 
-    private val ngramCountPairs = {
+    private val (totalCount: Double, scoreMap: Map[String, Double]) = {
         println(s"Loading scores from ngram file: $TRIGRAM_FILE")
 
         val bufferedSource = Source.fromFile(TRIGRAM_FILE)
@@ -20,25 +20,21 @@ object EnglishScore {
             (ngram, count)
         }.toSeq
 
-        bufferedSource.close()
+        val ngramCount = pairs.map(_._2).sum[Long].toDouble
 
-        pairs
-    }
-
-    private val totalCount = ngramCountPairs.map(_._2).sum[Long].toDouble
-
-    private val scoreMap = {
-        val scores = ngramCountPairs.map { case(ngram, count) =>
-            (ngram, math.log(count / totalCount))
+        val scores = pairs.map { case(ngram, count) =>
+            (ngram, math.log(count / ngramCount))
         }.toMap
 
         println("Successfully loaded counts into the score map")
 
-        scores
+        bufferedSource.close()
+
+        (ngramCount, scores)
     }
 
     def score(text: String): Double = {
-        text.toSeq.sliding(NGRAM_LENGTH).map { strSeq =>
+        text.replace(" ", "").sliding(NGRAM_LENGTH).map { strSeq =>
             val str = strSeq.mkString.toUpperCase
             if (scoreMap.contains(str)) {
                 scoreMap(str)

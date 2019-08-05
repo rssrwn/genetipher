@@ -10,7 +10,7 @@ import scala.util.Random
 class DecoderTests extends FunSuite {
 
     test("The main method can solve a substitution cipher") {
-        val plaintext = "the quick brown fox jumped"
+        val plaintext = "the quick brown fox jumped over the lazy dog"
         val ciphertext = encode(plaintext)
         val decodedOpt = new Decoder(ciphertext, Some("substitution")).decode()
 
@@ -71,10 +71,7 @@ class DecoderTests extends FunSuite {
             }
         }
 
-        val decoder = charMap.map(_.swap)
-
-        val ciphertext = text.map(char => charMap(char))
-        ciphertext
+        text.map(char => charMap(char))
     }
 
     private def randCharFromSet(chars: Set[Char]): Char = {

@@ -8,9 +8,9 @@ object Operators {
     def subsFitnessOp(ciphertext: String): FitnessOp[Char] = {
         genotype => {
             val plaintext = Util.buildPlaintext(ciphertext, genotype.elems)
+           // println("plaintext " + plaintext)
             val score = EnglishScore.score(plaintext)
-
-            println(score)
+           // println("score " + score)
 
             score
         }

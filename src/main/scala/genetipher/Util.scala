@@ -50,7 +50,6 @@ object Util {
         }
     }
 
-
     /**
       * Generates a lowercase character uniformly randomly selected
       * @return Random char
@@ -60,12 +59,21 @@ object Util {
     }
 
     /**
-      * Generates a Seq of lowercase characters uniformly randomly selected
-      * @param length Length of Seq to be generated
-      * @return Seq of random characters
+      * Generates a Seq of all lowercase letters
+      * @return Seq of shuffled letters
       */
-    def randCharSeq(length: Int): Seq[Char] = {
-        for (_ <- 0 until length) yield randChar()
+    def randDistinctCharSeq(): Seq[Char] = {
+        Random.shuffle(allChars).toSeq
+    }
+
+    def randCharFromSet(chars: Set[Char]): Char = {
+        val size = chars.size
+        val rand = Random.nextInt(size)
+        chars.toVector(rand)
+    }
+
+    val allChars: Set[Char] = {
+        (Util.ASCII_LOWER_A to Util.ASCII_LOWER_Z).map(i => i.toChar).toSet
     }
 
 }
