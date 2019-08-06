@@ -11,7 +11,7 @@ object AlgorithmFactory {
                 .withFitnessOp(Operators.subsFitnessOp(cipherText))
                 .withSelectionOp(Selection.selectBest[Char](lambda))
                 .withMutationOp(Mutation.appendMutatedPop[Char](mu))
-                .withNumIterations(100)
+                .withNumIterations(1000)
                 .build()
     }
 

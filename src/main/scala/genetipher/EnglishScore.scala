@@ -23,8 +23,10 @@ object EnglishScore {
         val ngramCount = pairs.map(_._2).sum[Long].toDouble
 
         val scores = pairs.map { case(ngram, count) =>
-            (ngram, math.log(count / ngramCount))
+            (ngram, count / ngramCount)
         }.toMap
+
+        val sorted = scores.toSeq.sortWith(_._2 > _._2)
 
         println("Successfully loaded counts into the score map")
 
@@ -33,14 +35,28 @@ object EnglishScore {
         (ngramCount, scores)
     }
 
+    // TODO assume no spaces, get better training data
     def score(text: String): Double = {
-        text.replace(" ", "").sliding(NGRAM_LENGTH).map { strSeq =>
+//        val words = text.split(" ").toSeq
+//        words.map { word =>
+//            word.sliding(NGRAM_LENGTH).map { strSeq =>
+//                val str = strSeq.mkString.toUpperCase
+//                if (scoreMap.contains(str)) {
+//                    scoreMap(str)
+//                } else {
+//                    // Give ngrams with 0 occurrences a lower score than 1 occurrence
+//                    math.log(0.01 / totalCount)
+//                }
+//            }.sum
+//        }.sum
+
+        text.filter(Util.isLetter).sliding(NGRAM_LENGTH).map { strSeq =>
             val str = strSeq.mkString.toUpperCase
             if (scoreMap.contains(str)) {
                 scoreMap(str)
             } else {
                 // Give ngrams with 0 occurrences a lower score than 1 occurrence
-                math.log(0.01 / totalCount)
+                0.01 / totalCount
             }
         }.sum
     }

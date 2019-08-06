@@ -10,9 +10,9 @@ import scala.util.Random
 class Decoder(ciphertext: String, encoding: Option[String]) {
 
     // Parameters for the genetic algorithm
-    private val lamdba = 20
-    private val mu = 80
-    private val numCharSwaps = 10
+    private val lamdba = 5
+    private val mu = 95
+    private val numCharSwaps = 3
 
     def decode(): Option[Seq[String]] = {
         if (encoding.isEmpty) {
