@@ -20,17 +20,15 @@ object Util {
       */
     def buildPlaintext(ciphertext: String, subs: Vector[Char]): String = {
         ciphertext.map { char: Char =>
-            if (char == ' ') {
-                ' '
+            if (!isLetter(char)) {
+                char
             } else {
                 val ascii = char.toInt
-                val idx = if (isUpperCase(char)) {
-                    ascii - ASCII_UPPER_A
+                if (isUpperCase(char)) {
+                    subs(ascii - ASCII_UPPER_A).toUpper
                 } else {
-                    ascii - ASCII_LOWER_A
+                    subs(ascii - ASCII_LOWER_A)
                 }
-
-                subs(idx)
             }
         }
     }
@@ -63,7 +61,7 @@ object Util {
       * @return Seq of shuffled letters
       */
     def randDistinctCharSeq(): Seq[Char] = {
-        Random.shuffle(allChars).toSeq
+        Random.shuffle(allLetters).toSeq
     }
 
     def randCharFromSet(chars: Set[Char]): Char = {
@@ -72,8 +70,12 @@ object Util {
         chars.toVector(rand)
     }
 
-    val allChars: Set[Char] = {
+    val allLetters: Set[Char] = {
         (Util.ASCII_LOWER_A to Util.ASCII_LOWER_Z).map(i => i.toChar).toSet
+    }
+
+    def isLetter(letter: Char): Boolean = {
+        allLetters.contains(letter) || allLetters.map(_.toUpper).contains(letter)
     }
 
 }
