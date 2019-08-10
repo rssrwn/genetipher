@@ -11,8 +11,10 @@ class Decoder(ciphertext: String, encoding: Option[String]) {
 
     // Parameters for the genetic algorithm
     private val lamdba = 5
-    private val mu = 95
+    private val mu = 45
     private val numCharSwaps = 3
+    private val numIters = 1000
+    private val completionTheshold = 2.0
 
     def decode(): Option[Seq[String]] = {
         if (encoding.isEmpty) {
@@ -22,7 +24,8 @@ class Decoder(ciphertext: String, encoding: Option[String]) {
 
         } else {
             val algorithm: Option[GeneticAlgorithm[Char]] = encoding.get match {
-                case "substitution" => Some(AlgorithmFactory.lamdbaMuSubsSolver(ciphertext, lamdba, mu))
+                // TODO Add other cipher types
+                case "substitution" => Some(AlgorithmFactory.lamdbaMuSubsSolver(ciphertext, lamdba, mu, numIters, completionTheshold))
                 case default =>
                     println(s"Cipher type $default is not supported, exiting...")
                     None
@@ -34,7 +37,7 @@ class Decoder(ciphertext: String, encoding: Option[String]) {
                 val bestEncodings = algorithm.get.run(randomPop(lamdba + mu))
                 val possiblePlaintexts = bestEncodings.map(enc => Util.buildPlaintext(ciphertext, enc.elems))
 
-                println("score " + EnglishScore.score(possiblePlaintexts.head))
+                println("score " + EnglishScore.avgNgramScore(possiblePlaintexts.head))
 
                 Some(possiblePlaintexts)
             }
