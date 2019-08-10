@@ -34,7 +34,7 @@ class Decoder(ciphertext: String, encoding: Option[String]) {
             if (algorithm.isEmpty) {
                 None
             } else {
-                val bestEncodings = algorithm.get.run(randomPop(lamdba + mu), logging = 20)
+                val bestEncodings = algorithm.get.run(randomPop(lamdba + mu))
                 val possiblePlaintexts = bestEncodings.map(enc => Util.buildPlaintext(ciphertext, enc.elems))
 
                 Some(possiblePlaintexts)

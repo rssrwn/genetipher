@@ -34,7 +34,7 @@ object Main {
                 println("The decoded string is as follows: ")
                 println(decoded.head)
             } else {
-                println("The following are all the possible plaintext solutions found by the search...")
+                println("The following are all the possible plaintext solutions found by the search...\n")
                 for (plaintext <- decoded) {
                     println(plaintext)
                     println("\n*****************************\n")

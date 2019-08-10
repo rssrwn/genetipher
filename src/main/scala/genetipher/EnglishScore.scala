@@ -37,7 +37,7 @@ object EnglishScore {
         (bestCount, meanProb, scores)
     }
 
-    // TODO assume no spaces, get better training data
+    // TODO assume no spaces, get better training data, use bigrams?
     def score(text: String): Double = {
         text.filter(Util.isLetter).sliding(NGRAM_LENGTH).map { strSeq =>
             val str = strSeq.mkString.toUpperCase

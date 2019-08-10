@@ -16,7 +16,7 @@ object AlgorithmFactory {
                 .withFitnessOp(Operators.subsFitnessOp(cipherText))
                 .withSelectionOp(Selection.selectBest[Char](lambda))
                 .withMutationOp(Mutation.appendMutatedPop[Char](mu))
-                .withCompletionOp(Operators.avgNgramScoreCompletionOp(completionThreshold))
+                //.withCompletionOp(Operators.avgNgramScoreCompletionOp(completionThreshold))
                 .withNumIterations(numIters)
                 .build()
     }
