@@ -1,7 +1,7 @@
 import Dependencies._
 
-ThisBuild / scalaVersion     := "2.12.8"
-ThisBuild / version          := "0.1.0"
+ThisBuild / scalaVersion     := "2.13.0"
+ThisBuild / version          := "0.2.0"
 ThisBuild / organization     := "com.example"
 ThisBuild / organizationName := "example"
 
@@ -11,7 +11,7 @@ lazy val root = (project in file("."))
 
         libraryDependencies += scalaTest % Test,
 
-        libraryDependencies += "com.example" % "genetic-search" % "1.0.0" from "file:///Users/Ross/Documents/Programming/genetipher/lib/genetic-search_2.12-1.0.0.jar"
+        libraryDependencies += "com.example" % "genetic-search" % "1.1.0" from "file:///Users/Ross/Documents/Programming/genetipher/lib/genetic-search_2.13-1.1.0.jar"
     )
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
