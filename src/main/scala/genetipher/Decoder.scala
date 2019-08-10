@@ -14,7 +14,7 @@ class Decoder(ciphertext: String, encoding: Option[String]) {
     private val mu = 45
     private val numCharSwaps = 3
     private val numIters = 1000
-    private val completionTheshold = 2.0
+    private val completionTheshold = 2.1
 
     def decode(): Option[Seq[String]] = {
         if (encoding.isEmpty) {
@@ -34,10 +34,8 @@ class Decoder(ciphertext: String, encoding: Option[String]) {
             if (algorithm.isEmpty) {
                 None
             } else {
-                val bestEncodings = algorithm.get.run(randomPop(lamdba + mu))
+                val bestEncodings = algorithm.get.run(randomPop(lamdba + mu), logging = 20)
                 val possiblePlaintexts = bestEncodings.map(enc => Util.buildPlaintext(ciphertext, enc.elems))
-
-                println("score " + EnglishScore.avgNgramScore(possiblePlaintexts.head))
 
                 Some(possiblePlaintexts)
             }

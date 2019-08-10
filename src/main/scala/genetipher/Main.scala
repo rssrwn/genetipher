@@ -8,17 +8,17 @@ object Main {
     def main(args: Array[String]): Unit = {
         val REQUIRED_ARGS = 1
 
-        if (args.length <= REQUIRED_ARGS) {
+        if (args.length < REQUIRED_ARGS) {
             throw new IllegalArgumentException("At least one argument (a filename) is required")
         }
 
-        val filename = args(1)
+        val filename = args(0)
         println(s"Filename of $filename passed into decoder")
 
         val ciphertext = readFile(filename)
 
-        val encodingType = if (args.length > REQUIRED_ARGS + 1) {
-            val cipherType = args(2)
+        val encodingType = if (args.length > REQUIRED_ARGS) {
+            val cipherType = args(1)
             println(s"Cipher type $cipherType passed into decoder")
             Some(cipherType)
         } else {
@@ -46,9 +46,10 @@ object Main {
     private def readFile(filename: String): String = {
         val bufferedSource = Source.fromFile(filename)
         val lines = bufferedSource.getLines()
+        val str = lines.mkString(" ")
         bufferedSource.close()
 
-        lines.mkString(" ")
+        str
     }
 
 }
