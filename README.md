@@ -12,4 +12,4 @@ There are two key files in this project:
 
 ### Usage 
 
-The project is made to be very simple to use. Clone the project and run `sbt "run <path to file with ciphertext> substitution"`. You can also build the jar using `sbt package` and then run. The "substitution" arg is simply to save the decoder from having to search for the type of cipher has been used. In the future I intend to allow this param to be optional, but this hasn't been implemented yet, so for now it's required.
+The project is made to be very simple to use. Clone the project and run `sbt "run <path to file with ciphertext> substitution"`. You can also build the jar using `sbt package` and then run. The "substitution" arg is simply to save the decoder from having to search for the type of cipher that has been used. In the future I intend to allow this param to be optional, but this hasn't been implemented yet, so for now it's required.
